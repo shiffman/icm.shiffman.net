@@ -20,23 +20,23 @@
 
 	<div id="sidebar">
 
-	<ul class="posts">
-	{% for post in site.posts reversed %}
-		{% if page.url == post.url %}
-		<li class="active"><a href="{{ post.url }}">{{ post.title }}</a></li>
-		{% else %}
-		<li><a href="{{ post.url }}">{{ post.title }}</a></li>
-    	{% endif %}		
-	{% endfor %}
-	</ul>	
+		<ul class="posts">
+		{% for post in site.posts reversed %}
+			{% if page.url == post.url %}
+			<li class="active"><a href="{{ post.url }}">{{ post.title }}</a></li>
+			{% else %}
+			<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+	    	{% endif %}		
+		{% endfor %}
+		</ul>	
 
 	</div>	
 
 	<div id="main">
 		<div id="content">
 		{{ content }}
-		<div>
-	</div>    
+		</div>
+	</div>  
 
 </body>
 </html>
