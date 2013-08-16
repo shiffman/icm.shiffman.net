@@ -7,7 +7,7 @@ html, body {
 }
 
 html {
-	background: #f6f6f6;	
+	background: #ececec;	
 	font-family: 'Georgia'; 	
 
 }
@@ -96,7 +96,7 @@ h2 {
 	right: 0;
 	padding-bottom: 54px;
 
-	background:#ffffff;
+	background:#f6f6f6;
 	min-height: 100%;
 }
 
@@ -133,7 +133,7 @@ nav {
 	display: none;
 }
 
-#footnotes {
+#footnotes , #codebox {
 	min-height: 1.2em;
 	margin: 12px 0;
 	background: #fff;
@@ -149,6 +149,14 @@ nav {
 	-moz-transition: opacity .25s ease-in-out;
 	-webkit-transition: opacity .25s ease-in-out;
 	*/
+}
+
+#codebox {
+	display:none;
+}
+
+pre {
+	overflow: scroll;
 }
 
 /*

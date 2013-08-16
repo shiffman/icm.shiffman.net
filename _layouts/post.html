@@ -12,6 +12,8 @@ layout: default
 	{{ content }}
 </div>
 
+<div id="codebox"><pre><code id="code"></code></pre></div>
+
 <hr/>
 
 {% include disqus.html %}
@@ -46,7 +48,7 @@ layout: default
 
 		$("#annotations").find("a")
 			.attr("target","_blank")
-			.attr("onclick","linkClick()");
+			.attr("onclick","linkClick(event);");
 
 		pop = Popcorn.vimeo(
 			'#video',
@@ -68,10 +70,38 @@ layout: default
 
 		pop.play();
 
+
 	});
 
-	function linkClick() {
+	function linkClick(e) {
+
+		var anchor = $(e.target);
+
+		if (anchor.attr('data-displaycode') == "true") {
+
+			e.preventDefault();
+			displayCode(anchor.attr('href'));
+		}
+
 		pop.pause();
+
+	}
+
+	function displayCode(url) {
+		
+		$.ajax({
+			url:url, 
+			accepts: {
+				json: "application/vnd.github.VERSION.raw"
+			},
+			success:function (data) {
+				var decodedContents = (atob(data.content.replace(/\n/g, "")));
+				$("#code").text(decodedContents);
+				$("#codebox").show();
+				
+			}
+		});
+
 	}
 
 </script>
