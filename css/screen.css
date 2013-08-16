@@ -153,10 +153,11 @@ nav {
 
 #codebox {
 	display:none;
+	overflow: scroll;
+	
 }
 
 pre {
-	overflow: scroll;
 }
 
 /*
