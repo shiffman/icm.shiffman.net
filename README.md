@@ -1,7 +1,7 @@
 Introduction to Computational Media Videos 
 ==========================================
 
-This site organizes a series of video lessons for my [Introduction to Computational Media](https://github.com/ITPNYU/ICM-2013) course at ITP.  
+This site organizes a series of video lessons for my [Introduction to Computational Media](https://github.com/ITPNYU/ICM-2013) course at ITP.  The site is: http://icm.shiffman.net.  
 
 
 Annotations
