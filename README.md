@@ -7,7 +7,7 @@ This site organizes a series of video lessons for my [Introduction to Computatio
 Annotations
 -----------
 
-We are experimenting with a system to display annotations to the video.  The raw source of an annotation looks like:
+We are experimenting with a system to display annotations to the video.  The annotations are timecoded and appear for a block of time in the video. The raw source of an annotation looks like:
 
 
 ```
