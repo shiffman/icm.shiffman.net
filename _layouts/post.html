@@ -24,7 +24,7 @@ layout: default
 <div id="codebox">
 	<h3>Code</h3>
 	<div id="codeview" class="box">
-		<pre><code id="code"></code></pre>
+		<pre id="code"></pre>
 	</div>
 </div>
 
@@ -52,15 +52,19 @@ layout: default
 		</div> 
 </div> 
 
+<link href="https://google-code-prettify.googlecode.com/svn/loader/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
 
 <script>
+
 	var pop;
 
-	Popcorn(function() {				
-
+	Popcorn(function() {
+		
 		$("#annotations").find("a")
 			.attr("target","_blank")
 			.attr("onclick","linkClick(event);");
@@ -115,7 +119,6 @@ layout: default
 				.click( function() {
 
 					var cueTime = $(this).attr('data-start');
-					console.log(cueTime);
 					cueTime = Popcorn.util.toSeconds( cueTime);
 					pop.currentTime(cueTime);
 
@@ -151,6 +154,8 @@ layout: default
 			success:function (data) {
 				var decodedContents = (atob(data.content.replace(/\n/g, "")));
 				$("#code").text(decodedContents);
+
+				$("#code").html( prettyPrintOne( $("#code").html() ) );
 				$("#codebox").slideToggle();
 				
 			}
