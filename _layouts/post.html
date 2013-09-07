@@ -28,7 +28,7 @@ layout: default
 	</div>
 </div>
 
-<div id="comments">
+<div id="commentsbox">
 
 	<h3>Comments</h3>
 
@@ -55,7 +55,7 @@ layout: default
 <link href="https://google-code-prettify.googlecode.com/svn/loader/prettify.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
 
@@ -64,7 +64,7 @@ layout: default
 	var pop;
 
 	Popcorn(function() {
-		
+
 		$("#annotations").find("a")
 			.attr("target","_blank")
 			.attr("onclick","linkClick(event);");
