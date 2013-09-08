@@ -4,6 +4,7 @@
 
 html, body {
 	height:100%;
+	color: #333;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -36,6 +37,13 @@ hr {
 	height: 2px;
 }
 
+a {
+	color: #369;
+}
+
+a:visited {
+	color: #666;
+}
 
 /*
 // Header
@@ -56,7 +64,7 @@ h1 strong, h2 strong{
 	font-family: 'ProximaNova-Bold'; 
 }
 
-h1 a, h2 a {
+h1 a, h2 a, h1 a:visited, h2 a:visited {
 	color: #fff;
 	text-decoration: none;
 }
