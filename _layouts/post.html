@@ -96,13 +96,23 @@ layout: default
 
 		$('#annotations').children().each(function(index,value) {
 
-			var startTime = $(this).attr('data-start');
+			var startTime = Popcorn.util.toSeconds( $(this).attr('data-start'));
+			var endTime = Popcorn.util.toSeconds( $(this).attr('data-end'));
+
+			if ( !$.isNumeric(startTime))
+				return -1;
+
+			if  ( !$.isNumeric(endTime))
+				endTime = startTime + 10;
+
+
+			console.log(startTime + " " + endTime);
 
 			// Cue the footnote in Popcorn
 
 			pop.footnote({
 				start: startTime,
-				end: $(this).attr('data-end'),
+				end: endTime,
 				text: $(this).html(),
 				target: "footnotes",
 				//effect: 'applyclass',
@@ -112,14 +122,13 @@ layout: default
 			// Add a direct link to the spot in the video
 
 			var videoLink = $("<div>")
-				.html(startTime)
+				.html($(this).attr('data-start'))
 				.attr('href','#')
 				.attr('data-start', startTime)
 				.addClass('videoLink')
 				.click( function() {
 
 					var cueTime = $(this).attr('data-start');
-					cueTime = Popcorn.util.toSeconds( cueTime);
 					pop.currentTime(cueTime);
 
 				});
