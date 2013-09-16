@@ -27,7 +27,6 @@ Popcorn(function() {
 	})
 
 	//pop.play();
-
 });
 
 function parseAnnotations() {
@@ -97,8 +96,27 @@ function linkClick(e) {
 
 }
 
+function getAPIURL(url) {
+	var regex = /^https?:\/\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)\/[^\/]+\/(.*)/g;
+
+	var match = regex.exec(url);
+	
+	var host = match[1];
+	var user = match[2];
+	var repository = match[3];
+	var type = match[4];
+	var path = match[5];
+
+	var newURL = "https://api.github.com/repos/" + user + "/" + repository + "/contents/" + path;
+
+	return newURL;
+
+}
+
 function displayCode(url) {
 	
+	var url = getAPIURL(url);
+
 	$.ajax({
 		url:url, 
 		accepts: {
