@@ -117,6 +117,9 @@ h3{
 	margin: auto;
 }
 
+#todo {
+	min-height: 450px;
+}
 
 li {
 	font-family: 'ProximaNova-Regular';

@@ -7,6 +7,11 @@ layout: default
 
 <h3>This video has not yet been made, but is hopefully coming soon</h3>
 
+<div id="todo">
+	{{content}}
+</div>
+
+<hr/>
 <nav id="pages"> 
 		<div class="pagePrevious"> 
 		{% if page.previous.url %} 
@@ -20,20 +25,3 @@ layout: default
 		{% endif %} 
 		</div> 
 </div> 
-
-<link href="https://google-code-prettify.googlecode.com/svn/loader/prettify.css" type="text/css" rel="stylesheet" />
-
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript" src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
-
-<script type="text/javascript">
-
-	var page = {
-		'vimeoURL': '{{page.vimeoURL}}'
-	};
-
-</script>
-
-
-<script type="text/javascript" src="/js/annotations.js"></script>
