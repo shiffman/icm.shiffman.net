@@ -216,6 +216,24 @@ nav {
 	display:none;
 }
 
+#codetabs {
+	font-family: 'ProximaNova-Regular';
+	font-size: .9em;
+}
+
+#codetabs a {
+	text-decoration: none;
+	padding: 8px;
+	background: #ccc;
+	color: #333;
+}
+
+#codetabs a.current {
+	color: #fff;
+	background: #369;
+	font-weight: bold;
+}
+
 #codeview {
 	overflow: scroll;
 }

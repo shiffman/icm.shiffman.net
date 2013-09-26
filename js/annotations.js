@@ -1,6 +1,7 @@
 "use strict";
 
 var pop;
+var urlCache = {};
 
 Popcorn(function() {
 
@@ -87,9 +88,14 @@ function linkClick(e) {
 	var anchor = $(e.target);
 
 	if (anchor.attr('data-displaycode') == "true") {
+		//console.log("Display code");
+
+		$("a.current").removeClass("current");
+		anchor.addClass("current");
+
+		displayCode(anchor.attr('href'));
 
 		e.preventDefault();
-		displayCode(anchor.attr('href'));
 	}
 
 	pop.pause();
@@ -114,22 +120,52 @@ function getAPIURL(url) {
 }
 
 function displayCode(url) {
-	
 	var url = getAPIURL(url);
 
-	$.ajax({
-		url:url, 
-		accepts: {
-			json: "application/vnd.github.VERSION.raw"
-		},
-		success:function (data) {
-			var decodedContents = (atob(data.content.replace(/\n/g, "")));
-			$("#code").text(decodedContents);
+	if (urlCache[url] != null) {
+		//console.log("Cached");
+		displayCodeData(urlCache[url]);
+	} else {
 
-			$("#code").html( prettyPrintOne( $("#code").html() ) );
-			$("#codebox").slideToggle();
-			
-		}
-	});
+		$.ajax({
+			url:url, 
+			success:function (data, status, xhr) {
+				if (urlCache[this.url] == null) urlCache[this.url] = data;
+				displayCodeData(data);
+			}
+		});
+	}
+}
+
+function displayCodeData(data) {
+	if ( $.isArray(data) ) {
+
+		//console.log("Tab clean-up");
+		$("#codetabs").html("");
+
+		$(data).each( function(index, value) {
+			var tabLink = $("<a/>")
+				.html(value["name"])
+				.attr("href", value["html_url"])
+				.attr("data-displaycode", "true")
+				.attr("onclick","linkClick(event);");
+
+			if (index == 0) {
+				tabLink.addClass("current");
+			}
+
+			$("#codetabs").append(tabLink);
+		});
+
+		displayCode(data[0]["html_url"])
+
+	} else {
+
+		var decodedContents = (atob(data.content.replace(/\n/g, "")));
+		$("#code").text(decodedContents);
+
+		$("#code").html( prettyPrintOne( $("#code").html() ) );
+		$("#codebox").slideDown();
+	}
 
 }
