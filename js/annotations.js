@@ -1,6 +1,7 @@
 "use strict";
 
 var pop;
+var urlCache = {};
 
 Popcorn(function() {
 
@@ -27,7 +28,6 @@ Popcorn(function() {
 	})
 
 	//pop.play();
-
 });
 
 function parseAnnotations() {
@@ -88,30 +88,84 @@ function linkClick(e) {
 	var anchor = $(e.target);
 
 	if (anchor.attr('data-displaycode') == "true") {
+		//console.log("Display code");
+
+		$("a.current").removeClass("current");
+		anchor.addClass("current");
+
+		displayCode(anchor.attr('href'));
 
 		e.preventDefault();
-		displayCode(anchor.attr('href'));
 	}
 
 	pop.pause();
 
 }
 
-function displayCode(url) {
-	
-	$.ajax({
-		url:url, 
-		accepts: {
-			json: "application/vnd.github.VERSION.raw"
-		},
-		success:function (data) {
-			var decodedContents = (atob(data.content.replace(/\n/g, "")));
-			$("#code").text(decodedContents);
+function getAPIURL(url) {
+	var regex = /^https?:\/\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)\/[^\/]+\/(.*)/g;
 
-			$("#code").html( prettyPrintOne( $("#code").html() ) );
-			$("#codebox").slideToggle();
-			
-		}
-	});
+	var match = regex.exec(url);
+	
+	var host = match[1];
+	var user = match[2];
+	var repository = match[3];
+	var type = match[4];
+	var path = match[5];
+
+	var newURL = "https://api.github.com/repos/" + user + "/" + repository + "/contents/" + path;
+
+	return newURL;
+
+}
+
+function displayCode(url) {
+	var url = getAPIURL(url);
+
+	if (urlCache[url] != null) {
+		//console.log("Cached");
+		displayCodeData(urlCache[url]);
+	} else {
+
+		$.ajax({
+			url:url, 
+			success:function (data, status, xhr) {
+				if (urlCache[this.url] == null) urlCache[this.url] = data;
+				displayCodeData(data);
+			}
+		});
+	}
+}
+
+function displayCodeData(data) {
+	if ( $.isArray(data) ) {
+
+		//console.log("Tab clean-up");
+		$("#codetabs").html("");
+
+		$(data).each( function(index, value) {
+			var tabLink = $("<a/>")
+				.html(value["name"])
+				.attr("href", value["html_url"])
+				.attr("data-displaycode", "true")
+				.attr("onclick","linkClick(event);");
+
+			if (index == 0) {
+				tabLink.addClass("current");
+			}
+
+			$("#codetabs").append(tabLink);
+		});
+
+		displayCode(data[0]["html_url"])
+
+	} else {
+
+		var decodedContents = (atob(data.content.replace(/\n/g, "")));
+		$("#code").text(decodedContents);
+
+		$("#code").html( prettyPrintOne( $("#code").html() ) );
+		$("#codebox").slideDown();
+	}
 
 }

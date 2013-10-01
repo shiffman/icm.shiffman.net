@@ -20,7 +20,7 @@ The annotation also can include source code by linking to a file on github.  For
 
 ```
 <div data-start="0:01" data-end="00:20">
-	<a href="https://api.github.com/repos/shiffman/LearningProcessing/contents/chp03_flow/example_3_2_mouseX_mouseY/example_3_2_mouseX_mouseY.pde" data-displaycode="true">See the code</a> for this example.
+	<a href="https://github.com/shiffman/LearningProcessing/blob/master/chp03_flow/example_3_2_mouseX_mouseY/example_3_2_mouseX_mouseY.pde" data-displaycode="true">See the code</a> for this example.
 </div>
 ```
 
