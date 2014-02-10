@@ -5,12 +5,18 @@ layout: default
 
 <h2>{{ page.title }}</h2>
 
-<div id="video" style="width: 800px; height: 450px;" ></div>
+<div id="videoBox">
+	<div id="video" style="width: 100%; height: 100%;" ></div>
+</div>
 
-<div id="footnotes" class="box"></div>
-<div id="showAnnotations">View All Annotations</div>
+<div id="footnotesBox" class="box"></div>
 
-<div id="annotationsbox">
+<div id="commandBox">
+	<span id="goFullscreen">Go Full Screen</span>
+	<span id="showAnnotations">View All Annotations</span>
+</div>
+
+<div id="annotationsBox">
 
 	<h3>Annotations</h3>
 
@@ -67,5 +73,5 @@ layout: default
 
 </script>
 
-
+<script type="text/javascript" src="/js/jquery.fullscreen-min.js"></script>
 <script type="text/javascript" src="/js/annotations.js"></script>

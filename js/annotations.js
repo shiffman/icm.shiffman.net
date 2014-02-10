@@ -2,6 +2,7 @@
 
 var pop;
 var urlCache = {};
+var fullscreen = false;
 
 Popcorn(function() {
 
@@ -16,19 +17,43 @@ Popcorn(function() {
 
 	parseAnnotations();
 
+	$("#goFullscreen").click( function() {
+		toggleFullScreen();
+	});		
+
+	$(document).bind("fullscreenchange", function() {
+	    if ($(document).fullScreen()) {
+
+	    	$("#videoBox").addClass("full");
+			$("#footnotesBox").addClass("full");
+
+	    } else {
+
+	    	$("#videoBox").removeClass("full");
+			$("#footnotesBox").removeClass("full");
+
+	    }
+	});	
+
 	$("#showAnnotations").click( function() {
 
-		$("#annotationsbox").slideToggle('slow', function() {
+		$("#annotationsBox").slideToggle('slow', function() {
 			if ($(this).is(":visible")) {
 				 $("#showAnnotations").text('Hide Annotations');                
 			} else {
 				 $("#showAnnotations").text('View All Annotations');              
 			} 				
 		});
-	})
+	});
 
 	//pop.play();
 });
+
+function toggleFullScreen() {
+
+	$(document).toggleFullScreen();
+
+}
 
 function parseAnnotations() {
 
@@ -58,7 +83,7 @@ function parseAnnotations() {
 			start: startTime,
 			end: endTime,
 			text: $(this).html(),
-			target: "footnotes",
+			target: "footnotesBox",
 			//effect: 'applyclass',
 			//applyclass: 'show'				
 		});
@@ -99,7 +124,7 @@ function linkClick(e) {
 	}
 
 	pop.pause();
-
+	$(document).fullScreen(false);
 }
 
 function getAPIURL(url) {
