@@ -275,6 +275,22 @@ nav {
 	overflow: scroll;
 }
 
+#startwatching {
+	text-align: center;
+	padding: 12px;
+	width: 300px;
+	background-color: #ddd;
+}
+
+
+#startwatching a {
+	font-family: 'ProximaNova-SemiBold';
+	font-size: 24pt;
+	color: #993366;
+	text-decoration: none;
+	padding: 0px;
+}
+
 /*
 #footnotes.show {
 	opacity: 1;
